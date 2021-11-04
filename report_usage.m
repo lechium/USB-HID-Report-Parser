@@ -40,7 +40,7 @@ mint8_t *ri_GenericDesktop(int32_t usage)
     case GD_Wheel:
         return "Wheel";
     case GD_Hat_Switch:
-        return "Switch";
+        return "Hat Switch";
     case GD_Counted_Buffer:
         return "Counted Buffer";
     case GD_Byte_Count:

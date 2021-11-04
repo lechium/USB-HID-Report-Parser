@@ -1,4 +1,13 @@
 #include "report_item.h"
+#import <Foundation/Foundation.h>
+#include <stdio.h>
+#include <errno.h>
+#include <libgen.h>
+#include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <getopt.h>
+#import <sys/utsname.h>
 uint8_t USBD_KeyBoardReportDesc[] =
 {
   /* 键盘定义了8B长度的消息：
@@ -61,7 +70,26 @@ uint8_t generic_desc[] = {
     0xff, 0x2a, 0x03, 0xff, 0x91, 0x02, 0x95, 0x04, 0x91, 0x01, 0xc0, 0xc0
 };
 
-int main() {
-    ri_Parse(generic_desc, sizeof(generic_desc));
-    return 0;
+char *progname;
+char *path;
+
+int main(int argc, const char * argv[]) {
+
+        progname = basename((char*)argv[0]);
+        path = dirname((char*)argv[0]);
+	if (argc >=2){
+		char *inputFile = (char*)argv[1];
+		NSString *filePath = [NSString stringWithUTF8String:inputFile];
+		NSLog(@"processing file: %@", filePath);
+		NSData *data = [NSData dataWithContentsOfFile:filePath options:NSDataReadingMappedIfSafe error:nil];
+		size_t length = [data length];
+		uint8_t bytes[length];
+		[data getBytes:bytes length:length];
+		ri_Parse(bytes, length);
+	} else {
+		ri_Parse(generic_desc, sizeof(generic_desc));
+	}
+	return 0;
+	
 }
+

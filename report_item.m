@@ -35,7 +35,7 @@ mint8_t *ri_ColletionType(uint8_t itemData)
     /* 0x07-0x7F RFU.
     ** 0x80-0xFF Vendor defined.
     */
-    return "Unknown";
+    return "Vendor Defined";
 }
 
 mint8_t *ri_dataType(uint8_t itemTag, int32_t itemData)
@@ -102,7 +102,7 @@ void  ri_MainItem(uint8_t itemTag, int32_t itemData, uint8_t *pspace)
         index += ri_StringGet(str + index, "End Collection");
         break;
     default:
-        index += ri_StringGet(str + index, "Unknown Item: %02X", itemTag);
+        index += ri_StringGet(str + index, "Vendor Defined Item: %02X", itemTag);
         break;
     }
     LOG("%s\r\n", str);
@@ -167,7 +167,7 @@ mint8_t *ri_UsagePage(int32_t itemData)
     case UP_Arcade_Page:
         return "Arcade";
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -192,7 +192,7 @@ mint8_t *ri_Exponent(int32_t itemData)
     if(code < 0x10U && code > 0x04U)
         return str[code - 5];
 
-    return "Unknown";
+    return "Vendor Defined";
 }
 
 #define NibbleToByte(nibble)    (((mint8_t)nibble & 0x08)?((mint8_t)nibble | 0xF0):(mint8_t)nibble)
@@ -229,7 +229,7 @@ mint8_t *ri_Unit(uint32_t itemData)
         strUnit = strUnit_English_Rotation;
         break;
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 
     index = ri_StringGet(str + index, "%s:", strUnit[0]);
@@ -301,7 +301,7 @@ void ri_GlobalItem(uint8_t itemTag, uint32_t itemData, uint8_t space, int32_t *p
         index += ri_StringGet(str + index, "Pop");
         break;
     default:
-        index += ri_StringGet(str + index, "Unknown Item: %02X", itemTag);
+        index += ri_StringGet(str + index, "Vendor Defined Item: %02X", itemTag);
         break;
     }
 
@@ -309,7 +309,7 @@ void ri_GlobalItem(uint8_t itemTag, uint32_t itemData, uint8_t space, int32_t *p
 }
 
 #define ri_DelimiterItem(itemData)  (((int32_t)itemData)? \
-                                     (((int32_t)itemData == 1)?"Open Set":"Unknown Setting"): \
+                                     (((int32_t)itemData == 1)?"Open Set":"Vendor Defined Setting"): \
                                      "Close Set")
 
 void ri_LocalItem(uint8_t itemTag, int32_t itemData, uint8_t space, int32_t usagePage)
@@ -356,7 +356,7 @@ void ri_LocalItem(uint8_t itemTag, int32_t itemData, uint8_t space, int32_t usag
         */
         index += ri_StringGet(str + index, "Delimiter (%s)", ri_DelimiterItem(itemData));
     default:
-        index += ri_StringGet(str + index, "Unknown Item: %02X", itemTag);
+        index += ri_StringGet(str + index, "Vendor Defined Item: %02X", itemTag);
         break;
     }
 
@@ -395,7 +395,7 @@ int ri_Parse(uint8_t *buf, uint16_t len)
             ri_LocalItem(itemTag, itemData, space, sUsagePage);
             break;
         default:
-            LOG("Unknown Type: %02X, index: %d\r\n", itemTag, index);
+            LOG("Vendor Defined Type: %02X, index: %d\r\n", itemTag, index);
             break;
         }
         index += (itemSize + 1);

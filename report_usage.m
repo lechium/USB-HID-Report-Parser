@@ -144,7 +144,7 @@ mint8_t *ri_GenericDesktop(int32_t usage)
     case GD_Sys_Display_LCD_Autoscale:
         return "System Display LCD Autoscale";
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -288,7 +288,7 @@ mint8_t *ri_VRControls(int32_t usage)
     case VR_Display_Enable:
         return "Display Enable";
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -351,7 +351,7 @@ mint8_t *ri_SportControls(int32_t usage)
     case SpC_Wood_9:
         return "Wood";
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -416,7 +416,7 @@ mint8_t *ri_GameControls(int32_t usage)
     case GC_Gamepad_Trigger:
         return "Gamepad Trigger";
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -439,7 +439,7 @@ mint8_t *ri_GenericDeviceControls(int32_t usage)
     case GDC_SC_Cleared:
         return "Security Code Cleared";
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -449,7 +449,7 @@ mint8_t *ri_KeyboardOrKeypad(int32_t usage)
     {
     //TODO:
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -612,7 +612,7 @@ mint8_t *ri_LEDs(int32_t usage)
     case LED_External_Power_Connected:
         return "External Power Connected";
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -737,7 +737,7 @@ mint8_t *ri_Telephony(int32_t usage)
 	case TD_Ringer:
 		return "Ringer";
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1474,7 +1474,7 @@ mint8_t *ri_Consumer(int32_t usage)
     case UC_AC_Distribute_Verti:
         return "AC Distribute Vertically";
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1561,7 +1561,7 @@ mint8_t *ri_Digitizer(int32_t usage)
     case D_Tablet_Pick:
         return "Tablet Pick";
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1575,7 +1575,7 @@ mint8_t *ri_PIDPage(int32_t usage)
     ** This document didn't describe details.
     */
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1586,7 +1586,7 @@ mint8_t *ri_Unicode(int32_t usage)
         /* see HID 1.11 Chapter 17
         */
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1731,7 +1731,7 @@ mint8_t *ri_AlphanumericDisplay(int32_t usage)
     case AD_Soft_Button_Report:
         return "Soft Button Report";
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1798,7 +1798,7 @@ mint8_t *ri_MedicalInstruments(int32_t usage)
     case MI_Soft_Control_Adjust:
         return "Soft Control Adjust";
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1811,7 +1811,7 @@ mint8_t *ri_Monitor(int32_t usage)
     ** This document didn't describe details.
     */
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1824,7 +1824,7 @@ mint8_t *ri_Power(int32_t usage)
     ** This document didn't describe details.
     */
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1837,7 +1837,7 @@ mint8_t *ri_BarCodeScanner(int32_t usage)
     ** This document didn't describe details.
     */
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1850,7 +1850,7 @@ mint8_t *ri_Scale(int32_t usage)
     ** This document didn't describe details.
     */
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1864,7 +1864,7 @@ mint8_t *ri_MSRDevices(int32_t usage)
     ** This document didn't describe details.
     */
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1877,7 +1877,7 @@ mint8_t *ri_CameraControl(int32_t usage)
     ** This document didn't describe details.
     */
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1890,7 +1890,7 @@ mint8_t *ri_Arcade(int32_t usage)
     ** This document didn't describe details.
     */
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }
 
@@ -1953,6 +1953,6 @@ mint8_t *ri_Usage(int32_t usagePage, int32_t usage)
     // case UP_Arcade_Page:
     //     return ri_Arcade(usage);
     default:
-        return "Unknown";
+        return "Vendor Defined";
     }
 }

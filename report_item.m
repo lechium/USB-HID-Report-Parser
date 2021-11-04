@@ -17,9 +17,9 @@
 
 #define ri_ItemSize(sizeMask)      ((uint8_t)(sizeMask) == Size_4B?4:(uint8_t)(sizeMask))
 
-uint8_t *ri_ColletionType(uint8_t itemData)
+mint8_t *ri_ColletionType(uint8_t itemData)
 {
-    static uint8_t *colType[] = {
+    static mint8_t *colType[] = {
         "Physical",
         "App",
         "Logical",
@@ -38,10 +38,10 @@ uint8_t *ri_ColletionType(uint8_t itemData)
     return "Unknown";
 }
 
-uint8_t *ri_dataType(uint8_t itemTag, int32_t itemData)
+mint8_t *ri_dataType(uint8_t itemTag, int32_t itemData)
 {
 #define STR_BUFFER_SIZE     (128U)
-    static uint8_t str[STR_BUFFER_SIZE];
+    static mint8_t str[STR_BUFFER_SIZE];
 
     int32_t index = 0;
 
@@ -68,12 +68,12 @@ uint8_t *ri_dataType(uint8_t itemTag, int32_t itemData)
         index += ri_StringGet(str + index, ", ???");
 
     str[index] = 0;
-    return (uint8_t *)str;
+    return (mint8_t *)str;
 }
 
 void  ri_MainItem(uint8_t itemTag, int32_t itemData, uint8_t *pspace)
 {
-    uint8_t str[256] = {0};
+    mint8_t str[256] = {0};
     int32_t index = 0;
 
     for (; index < *pspace; index++)
@@ -108,7 +108,7 @@ void  ri_MainItem(uint8_t itemTag, int32_t itemData, uint8_t *pspace)
     LOG("%s\r\n", str);
 }
 
-uint8_t *ri_UsagePage(int32_t itemData)
+mint8_t *ri_UsagePage(int32_t itemData)
 {
     switch(itemData)
     {
@@ -183,9 +183,9 @@ int32_t ri_GetItemData(uint8_t *itemData, uint8_t size)
     return 0;
 }
 
-int8_t *ri_Exponent(int32_t itemData)
+mint8_t *ri_Exponent(int32_t itemData)
 {
-    static int8_t *str[] = {"5","6","7","-8","-7","-6","-5","-4","-3","-2","-1"};
+    static mint8_t *str[] = {"5","6","7","-8","-7","-6","-5","-4","-3","-2","-1"};
 
     uint8_t code = (uint8_t)itemData;
 
@@ -195,21 +195,21 @@ int8_t *ri_Exponent(int32_t itemData)
     return "Unknown";
 }
 
-#define NibbleToByte(nibble)    (((int8_t)nibble & 0x08)?((int8_t)nibble | 0xF0):(int8_t)nibble)
+#define NibbleToByte(nibble)    (((mint8_t)nibble & 0x08)?((mint8_t)nibble | 0xF0):(mint8_t)nibble)
 
-int8_t *ri_Unit(uint32_t itemData)
+mint8_t *ri_Unit(uint32_t itemData)
 {
-    static uint8_t str[128] = {0};
+    static mint8_t str[128] = {0};
 
-    int8_t *strUnit_SI_Linear[] = {"SI Linear","cm","Gram","Seconds","Kelvin","Ampere","Candela"};
-    int8_t *strUnit_SI_Rotation[] = {"SI Rotation","rad","Gram","Seconds","Kelvin","Ampere","Candela"};
-    int8_t *strUnit_English_Linear[] = {"English Linear","Inch","Slug","Seconds","Fahrenheit","Ampere","Candela"};
-    int8_t *strUnit_English_Rotation[] = {"English Rotation","Degrees","Slug","Seconds","Fahrenheit","Ampere","Candela"};
-    int8_t **strUnit = NULL;
+    mint8_t *strUnit_SI_Linear[] = {"SI Linear","cm","Gram","Seconds","Kelvin","Ampere","Candela"};
+    mint8_t *strUnit_SI_Rotation[] = {"SI Rotation","rad","Gram","Seconds","Kelvin","Ampere","Candela"};
+    mint8_t *strUnit_English_Linear[] = {"English Linear","Inch","Slug","Seconds","Fahrenheit","Ampere","Candela"};
+    mint8_t *strUnit_English_Rotation[] = {"English Rotation","Degrees","Slug","Seconds","Fahrenheit","Ampere","Candela"};
+    mint8_t **strUnit = NULL;
 
     int32_t index = 0;
-    int8_t nibble = itemData & 0xF;
-    int8_t nibbleNo = 0;    /* 7 is reserved. */
+    mint8_t nibble = itemData & 0xF;
+    mint8_t nibbleNo = 0;    /* 7 is reserved. */
 
     /* System */
     switch(nibble)
@@ -249,7 +249,7 @@ int8_t *ri_Unit(uint32_t itemData)
 
 void ri_GlobalItem(uint8_t itemTag, int32_t itemData, uint8_t space, int32_t *pUsagePage)
 {
-    uint8_t str[256] = {0};
+    mint8_t str[256] = {0};
     int32_t index = 0;
 
     for (; index < space; index++)
@@ -308,7 +308,7 @@ void ri_GlobalItem(uint8_t itemTag, int32_t itemData, uint8_t space, int32_t *pU
 
 void ri_LocalItem(uint8_t itemTag, int32_t itemData, uint8_t space, int32_t usagePage)
 {
-    uint8_t str[256] = {0};
+    mint8_t str[256] = {0};
     int32_t index = 0;
 
     for (; index < space; index++)
@@ -398,56 +398,24 @@ int ri_Parse(uint8_t *buf, uint16_t len)
     return (index < len);
 }
 
-uint8_t USBD_KeyBoardReportDesc[] =
-{
-  /* 键盘定义了8B长度的消息：
-  ** 第一个Byte表示8个特殊按键是否按下
-  ** 第二个Byte为常量，自定义数据
-  ** 后六个Byte代表普通按键是否被按下，最多同时识别六个，超出则应输出按键无效(FF)
-  */
-  0x05, 0x01,  /* Usage Page (Generic Desktop) */
-  0x09, 0x06,  /* Usage (Keyboard) */
-  0xA1, 0x01,  /* Collection (Application) */
-  0x85, 0x01,  /* Report ID 只有一个报告，可以忽略该字段 */
-  0x05, 0x07,  /*   Usage (Keypad) */
-
-  /* 特殊按键的输入报告 */
-  0x19, 0xE0,  /*   Usage Minimum (Left Control) */
-  0x29, 0xE7,  /*   Usage Maximum (Right GUI) */
-  0x15, 0x00,  /*   Logical Minimum (0) */
-  0x25, 0x01,  /*   Logical Maximum (1) */
-  0x95, 0x08,  /*   Report Count (8) */
-  0x75, 0x01,  /*   Report Size Bit(s) (1) */
-  0x81, 0x02,  /*     Input (Data, Var, Abs) 8bit分别对应E0~E7键值 */
-  0x95, 0x01,  /*   Report Count (1) */
-  0x75, 0x08,  /*   Report Size Bit(s) (8) */
-  0x81, 0x03,  /*     Input (Const, Var, Abs) 固定为常量0，保留字节OEM使用 */
-
-  /* 普通按键的输入报告 */
-  0x05, 0x07,  /*   Usage (Keypad) */
-  0x19, 0x00,  /*   Usage Minimum (0)：没有键按下 */
-  0x29, 0x68,  /*   Usage Maximum (104)：最大键值 */
-  0x15, 0x00,  /*   Logical Minimum (0) */
-  0x25, 0x68,  /*   Logical Maximum (104) */
-  0x95, 0x06,  /*   Report Count (6)：最多同时识别6个普通键按下 */
-  0x75, 0x08,  /*   Report Size Bit(s) (8) */
-  0x81, 0x00,  /*     Input (Data, Array, Abs) */
-    
-  /* 指示灯的输出报告 */
-  0x05, 0x08,  /*   Usage (LEDs) */
-  0x19, 0x01,  /*   Usage Minimum (NumLock) */
-  0x29, 0x05,  /*   Usage Maximum (Kana)  */
-  0x95, 0x05,  /*   Report Count (5) */
-  0x75, 0x01,  /*   Report Size Bit(s) (1) */
-  0x91, 0x02,  /*     Output (Data, Var, Abs) */
-  0x95, 0x01,  /*   Report Count (1) */
-  0x75, 0x03,  /*   Report Size Bit(s) (3) */
-  0x91, 0x01,  /*     Output(Const, Array, Abs) 补充3bit对齐到Byte */
-  0xC0         /* End Collection */
+char og_generic_desc[] = {
+    0x05, 0x01, 0x09, 0x05, 0xa1, 0x01, 0x09, 0x05, 0xa1, 0x02, 0x15, 0x81,
+    0x25, 0x7f, 0x35, 0x81, 0x45, 0x7f, 0x05, 0x01, 0x09, 0x01, 0xa1, 0x00,
+    0x75, 0x08, 0x95, 0x04, 0x09, 0x30, 0x09, 0x31, 0x09, 0x32, 0x09, 0x35,
+    0x81, 0x02, 0xc0, 0x95, 0x02, 0x15, 0x00, 0x26, 0xff, 0x00, 0x35, 0x00,
+    0x46, 0xff, 0x00, 0x05, 0x09, 0x09, 0x07, 0x09, 0x08, 0x81, 0x02, 0x95,
+    0x04, 0x05, 0x01, 0x09, 0x90, 0x09, 0x92, 0x09, 0x91, 0x09, 0x93, 0x81,
+    0x02, 0x95, 0x06, 0x05, 0x09, 0x19, 0x01, 0x29, 0x06, 0x81, 0x02, 0x75,
+    0x01, 0x95, 0x02, 0x15, 0x00, 0x25, 0x01, 0x35, 0x00, 0x45, 0x01, 0x09,
+    0x09, 0x09, 0x0a, 0x81, 0x02, 0x95, 0x01, 0x05, 0x0c, 0x0a, 0x23, 0x02,
+    0x81, 0x02, 0x95, 0x05, 0x81, 0x03, 0x95, 0x04, 0x05, 0x08, 0x1a, 0x00,
+    0xff, 0x2a, 0x03, 0xff, 0x91, 0x02, 0x95, 0x04, 0x91, 0x01, 0xc0, 0xc0
 };
 
-int main()
+
+
+int doScienceBro(unsigned char *data, size_t length)
 {
-    ri_Parse(USBD_KeyBoardReportDesc, sizeof(USBD_KeyBoardReportDesc));
+    ri_Parse(data, length);
     return 0;
 }

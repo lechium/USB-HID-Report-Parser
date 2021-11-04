@@ -5,7 +5,9 @@
 #define REPORT_USAGE_H
 
 #include "report_item.h"
-
+#include <stdio.h>
+#include <sys/_types/_u_int8_t.h>
+#include <sys/types.h>
 /* Usage Page: Generic Desktop (0x01U)
 ** Sys: System
 */
@@ -984,7 +986,7 @@
 extern "C" {
 #endif
 
-int8_t *ri_Usage(int32_t usagePage, int32_t usage);
+mint8_t *ri_Usage(int32_t usagePage, int32_t usage);
 
 #ifdef __cplusplus
 }

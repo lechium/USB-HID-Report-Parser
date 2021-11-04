@@ -1,6 +1,8 @@
 #ifndef _REPORT_ITEM_H
 #define _REPORT_ITEM_H
 
+#include <sys/types.h>
+#import <sys/_types/_u_int8_t.h>
 /* 注意：只对短条目进行解析（Short Item）
 */
 
@@ -170,11 +172,14 @@
 #define LOGW        printf
 #define LOGE        printf
 
+int ri_Parse(unsigned char *buf, unsigned short len);
+int doScienceBro(unsigned char *data, size_t length);
+
 #ifndef uint8_t
 typedef unsigned char       uint8_t;
 typedef unsigned short      uint16_t;
 typedef unsigned int        uint32_t;
-typedef char                int8_t;
+typedef char                mint8_t;
 typedef short               int16_t;
 typedef int                 int32_t;
 typedef long long           int64_t;

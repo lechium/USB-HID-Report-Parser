@@ -1,6 +1,7 @@
 #include "report_usage.h"
 
-int8_t *ri_GenericDesktop(int32_t usage)
+
+mint8_t *ri_GenericDesktop(int32_t usage)
 {
     switch (usage)
     {
@@ -147,7 +148,7 @@ int8_t *ri_GenericDesktop(int32_t usage)
     }
 }
 
-int8_t *ri_SimulationControls(int32_t usage)
+mint8_t *ri_SimulationControls(int32_t usage)
 {
     switch (usage)
     {
@@ -258,7 +259,7 @@ int8_t *ri_SimulationControls(int32_t usage)
     }
 }
 
-int8_t *ri_VRControls(int32_t usage)
+mint8_t *ri_VRControls(int32_t usage)
 {
     switch(usage)
     {
@@ -291,7 +292,7 @@ int8_t *ri_VRControls(int32_t usage)
     }
 }
 
-int8_t *ri_SportControls(int32_t usage)
+mint8_t *ri_SportControls(int32_t usage)
 {
     switch(usage)
     {
@@ -354,7 +355,7 @@ int8_t *ri_SportControls(int32_t usage)
     }
 }
 
-int8_t *ri_GameControls(int32_t usage)
+mint8_t *ri_GameControls(int32_t usage)
 {
     switch(usage)
     {
@@ -419,7 +420,7 @@ int8_t *ri_GameControls(int32_t usage)
     }
 }
 
-int8_t *ri_GenericDeviceControls(int32_t usage)
+mint8_t *ri_GenericDeviceControls(int32_t usage)
 {
     switch(usage)
     {
@@ -442,7 +443,7 @@ int8_t *ri_GenericDeviceControls(int32_t usage)
     }
 }
 
-int8_t *ri_KeyboardOrKeypad(int32_t usage)
+mint8_t *ri_KeyboardOrKeypad(int32_t usage)
 {
     switch(usage)
     {
@@ -452,7 +453,7 @@ int8_t *ri_KeyboardOrKeypad(int32_t usage)
     }
 }
 
-int8_t *ri_LEDs(int32_t usage)
+mint8_t *ri_LEDs(int32_t usage)
 {
     switch(usage)
     {
@@ -615,25 +616,25 @@ int8_t *ri_LEDs(int32_t usage)
     }
 }
 
-int8_t *ri_Button(int32_t usage)
+mint8_t *ri_Button(int32_t usage)
 {
-    static int8_t str[16];
+    static mint8_t str[16];
 
     sprintf(str,"Button %d", usage);
 
     return str;
 }
 
-int8_t *ri_Ordinal(int32_t usage)
+mint8_t *ri_Ordinal(int32_t usage)
 {
-    static int8_t str[16];
+    static mint8_t str[16];
 
     sprintf(str,"Instance %d", usage);
 
     return str;
 }
 
-int8_t *ri_Telephony(int32_t usage)
+mint8_t *ri_Telephony(int32_t usage)
 {
     switch(usage)
     {
@@ -740,7 +741,7 @@ int8_t *ri_Telephony(int32_t usage)
     }
 }
 
-int8_t *ri_Consumer(int32_t usage)
+mint8_t *ri_Consumer(int32_t usage)
 {
     switch(usage)
     {
@@ -1477,7 +1478,7 @@ int8_t *ri_Consumer(int32_t usage)
     }
 }
 
-int8_t *ri_Digitizer(int32_t usage)
+mint8_t *ri_Digitizer(int32_t usage)
 {
     switch(usage)
     {
@@ -1564,7 +1565,7 @@ int8_t *ri_Digitizer(int32_t usage)
     }
 }
 
-int8_t *ri_PIDPage(int32_t usage)
+mint8_t *ri_PIDPage(int32_t usage)
 {
     switch(usage)
     {
@@ -1578,7 +1579,7 @@ int8_t *ri_PIDPage(int32_t usage)
     }
 }
 
-int8_t *ri_Unicode(int32_t usage)
+mint8_t *ri_Unicode(int32_t usage)
 {
     switch(usage)
     {
@@ -1589,7 +1590,7 @@ int8_t *ri_Unicode(int32_t usage)
     }
 }
 
-int8_t *ri_AlphanumericDisplay(int32_t usage)
+mint8_t *ri_AlphanumericDisplay(int32_t usage)
 {
     switch(usage)
     {
@@ -1734,7 +1735,7 @@ int8_t *ri_AlphanumericDisplay(int32_t usage)
     }
 }
 
-int8_t *ri_MedicalInstruments(int32_t usage)
+mint8_t *ri_MedicalInstruments(int32_t usage)
 {
     switch(usage)
     {
@@ -1801,7 +1802,7 @@ int8_t *ri_MedicalInstruments(int32_t usage)
     }
 }
 
-int8_t *ri_Monitor(int32_t usage)
+mint8_t *ri_Monitor(int32_t usage)
 {
     switch(usage)
     {
@@ -1814,7 +1815,7 @@ int8_t *ri_Monitor(int32_t usage)
     }
 }
 
-int8_t *ri_Power(int32_t usage)
+mint8_t *ri_Power(int32_t usage)
 {
     switch(usage)
     {
@@ -1827,7 +1828,7 @@ int8_t *ri_Power(int32_t usage)
     }
 }
 
-int8_t *ri_BarCodeScanner(int32_t usage)
+mint8_t *ri_BarCodeScanner(int32_t usage)
 {
     switch(usage)
     {
@@ -1840,7 +1841,7 @@ int8_t *ri_BarCodeScanner(int32_t usage)
     }
 }
 
-int8_t *ri_Scale(int32_t usage)
+mint8_t *ri_Scale(int32_t usage)
 {
     switch(usage)
     {
@@ -1853,7 +1854,7 @@ int8_t *ri_Scale(int32_t usage)
     }
 }
 
-int8_t *ri_MSRDevices(int32_t usage)
+mint8_t *ri_MSRDevices(int32_t usage)
 {
     /* Megnetic Stripe Reading Device */
     switch(usage)
@@ -1867,7 +1868,7 @@ int8_t *ri_MSRDevices(int32_t usage)
     }
 }
 
-int8_t *ri_CameraControl(int32_t usage)
+mint8_t *ri_CameraControl(int32_t usage)
 {
     switch(usage)
     {
@@ -1880,7 +1881,7 @@ int8_t *ri_CameraControl(int32_t usage)
     }
 }
 
-int8_t *ri_Arcade(int32_t usage)
+mint8_t *ri_Arcade(int32_t usage)
 {
     switch(usage)
     {
@@ -1893,7 +1894,7 @@ int8_t *ri_Arcade(int32_t usage)
     }
 }
 
-int8_t *ri_Usage(int32_t usagePage, int32_t usage)
+mint8_t *ri_Usage(int32_t usagePage, int32_t usage)
 {
     switch(usagePage)
     {

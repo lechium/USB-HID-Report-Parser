@@ -171,14 +171,14 @@ mint8_t *ri_UsagePage(int32_t itemData)
     }
 }
 
-int32_t ri_GetItemData(uint8_t *itemData, uint8_t size)
+uint32_t ri_GetItemData(uint8_t *itemData, uint8_t size)
 {
     if(size == 1)
         return *itemData;
     else if(size == 2)
-        return *((int16_t *)itemData);
+        return *((uint16_t *)itemData);
     else if(size == 4)
-        return *((int32_t *)itemData);
+        return *((uint32_t *)itemData);
 
     return 0;
 }
@@ -247,7 +247,7 @@ mint8_t *ri_Unit(uint32_t itemData)
     return str;
 }
 
-void ri_GlobalItem(uint8_t itemTag, int32_t itemData, uint8_t space, int32_t *pUsagePage)
+void ri_GlobalItem(uint8_t itemTag, uint32_t itemData, uint8_t space, int32_t *pUsagePage)
 {
     mint8_t str[256] = {0};
     int32_t index = 0;
@@ -262,13 +262,19 @@ void ri_GlobalItem(uint8_t itemTag, int32_t itemData, uint8_t space, int32_t *pU
         index += ri_StringGet(str + index, "Usage Page (%s)", ri_UsagePage(itemData));
         break;
     case Logical_Minimum(0):
-        index += ri_StringGet(str + index, "Logical Min (%d)", itemData);
+            if (itemData == 0x81){
+                itemData = -127;
+            }
+        index += ri_StringGet(str + index, "Logical Min (%i)", itemData);
         break;
     case Logical_Maximum(0):
         index += ri_StringGet(str + index, "Logical Max (%d)", itemData);
         break;
     case Physical_Minimum(0):
-        index += ri_StringGet(str + index, "Physical Min (%d)", itemData);
+            if (itemData == 0x81){
+                itemData = -127;
+            }
+        index += ri_StringGet(str + index, "Physical Min (%i)", itemData);
         break;
     case Physical_Maximum(0):
         index += ri_StringGet(str + index, "Physical Max (%d)", itemData);
@@ -368,7 +374,7 @@ int ri_Parse(uint8_t *buf, uint16_t len)
 
         uint8_t itemTag = buf[index] & TAG_MASK;
         uint8_t itemSize = ri_ItemSize(buf[index] & SIZE_MASK);
-        int32_t itemData = 0;
+        uint32_t itemData = 0;
 
         if(index + itemSize >= len)
         {
